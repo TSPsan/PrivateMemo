@@ -1,0 +1,36 @@
+1, gitインストール(参考: Git bookのページ、他サイト)
+	https://employment.en-japan.com/engineerhub/entry/2017/01/31/110000
+	https://qiita.com/forest1/items/234026f7a305bf45f01a
+
+  $ apt-get install git
+
+2, sshの鍵作成(公開鍵、秘密鍵)
+	パーミッション設定(600), (sshフォルダ, 秘密鍵ファイル)
+
+3, ssh通信するための簡易コマンド作成のためconfig作成
+	(コマンド例: ssh ~ )
+
+4, GitHub登録(公開鍵登録、2要素認証)
+  https://qiita.com/katsukii/items/9773e9cfea7d929fcf9c
+  https://www.bitcoin-trade.info/entry/2fa
+  https://howpon.com/5281
+
+5, ssh-agent 作成可能(exec)
+	ssh-add設定確認(秘密鍵ファイル)
+		https://laboradian.com/how-to-use-ssh-agent/
+	5に関してはsshの通信をサーバ先でも可能にする機能。(秘密鍵を保持し続ける)
+  リモートへPushやCloneしたりする際に必要。
+
+~実際にやったssh通信~
+	1, :$ ssh github_pri で接続試み←ココ間違い
+		→deney
+
+	2, github公式のhelp見る
+	  -vtでデバックを出力 →エラー箇所の見方わからず
+
+	3, 解決
+		config内容が間違えていた。
+			接続先: github
+			user:git
+		にしないといけなかった。
+

@@ -1,0 +1,81 @@
+Hegokuの構築
+
+HPで会員登録
+CLI(Herokuのコマンドラインツール)インストール
+	$ curl https://cli-assets.heroku.com/install.sh | sh
+
+    sudo apt-get 
+
+sshの設定
+	例: "ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+	-tオプションで、鍵のタイプを指定。
+	-bオプションで、鍵の長さを指定。鍵が短いとセキュリティ的に危険。
+	ssh-keygenのデフォルト値2,048ビットのまま生成・利用される場合も多いが、GitHubの推奨は4,096ビット。より安全性の高い値を推奨している。
+	-Cオプションで、鍵にコメントを付加できます。
+	なくても問題ないが複数の鍵を管理するときは、何の鍵なのかを分かりやすくするため、コメントを有効的に利用するべきである。
+
+  ファイル名の変更
+  鍵の名前を一意に命名する。GitHubならファイル名を id_rsa_github のようにする
+
+sshの公開鍵をHerokuに登録(HP上でやる)
+		CLIでそこの操作はしない。($ heroku keys:add はやらない。鍵が名前の変更できずに生成、登録されてしまうため。)
+  公開鍵/秘密鍵の生成は$ ssh-keygen の方法で生成、その後この登録操作を行う。
+  rsa_....pub ファイルの内容をそのままペーストする。
+
+	*ここでVimにクリップボード機能(Vimの内容をブラウザへのコピペ操作)が必要なことに気づいた。
+	→GUI操作の機能付きVimをインストールした。(環境構築メモ/vimの設定.txt参照)
+
+
+heroku login でログインできた。(通信確認の作業)
+* $ ssh heroku ではできないため要確認。
+	→公式ページにあるvalidete connection の欄にある $ ssh -v git@heroku.com では通信確認されたためおｋとする。
+	$ ssh heroku コマンドでの通信確認は公式のページには言及されていないからgithubとは仕様が違うからできなかったかもしれない。
+
+これでコマンドラインで( $ heroku ~ )でHerokuへの操作が可能になった。
+
+2021/ 02/ 25
+  Herokuのログ見ようとしたらきれいに消えてた、1週間で消えるみたい。
+		heroku CLIの問題と勘違いしてアップデート作業をした、まぁ更新するのはいい事だからおｋ。
+
+	heroku CLIのアップデートについて
+			$ sudo apt-get update && sudo apt-get upgrade heroku
+    で更新試みたが失敗。
+    
+    一旦Ubuntuのパッケージ類を更新
+			$ sudo apt-get upgrade(本来の手順は update -> upgrade)
+				updateではなくてupgradeと先にやってしまった。本来はupdate -> upgrade
+  CLIのアップデート完了。
+
+  余談: WSL側のアップデート問題
+  $ apt-get update で一部アップデート出来なかった。chromeが更新できていないポイ。
+    Ubuntu内のchromeの公開鍵の署名期限が切れたため通信できなかった、よって公開鍵を更新。(年一回？)
+			$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 78BD65473CB3BD13
+				--keyserver (取得するキーをホストするサーバーURL ← 取得先？) --recv-keys (対象の公開鍵ID)
+        * $ apt-get updateで返ってきたエラーの NO_PUBKEY の公開鍵IDをコピペすること。
+		update作業中、WindowsDefenderが'dirmngr'というプログラムをファイアウォールでキャッチするが許可しないでキャンセルしておく。
+			調べたがよくわからん、WSl特有の原因らしい。公開鍵は更新されたようなのでおｋ。
+    
+  updateも無事終了
+
+	(IT(言語ツール)/ WSL のブックマーク参考)
+
+2022/ 04/ 12 
+github、Herokuへのsshキーは1年使わないと破棄される。
+  よって新しく生成しなおす。
+
+	1: $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+		注意: Herokuは現在RSA および DSA キー形式のみ。
+			$ ssh-keygen -t ed25519 -C "vsig7fs42v8a@gmail.com"
+			-t のオプションは暗号方式。今回、GitHubの案内のEd25519は採用できない。
+  2: ファイル名を変更
+		鍵の名前を一意に命名する。GitHubならファイル名を id_rsa_heroku のようにする
+    個人用なので id_rsa_heroku_pri にした。
+  3: .sshフォルダのconfigを書き換え
+		IdentityFile ~/.ssh/id_rsa_heroku_pri
+  4: Herokuの設定ページでsshの公開鍵(テキスト文)をペースト、登録
+		どのみちUbuntu特有の改行のインデントも空白としてコピーされてしまうのでアナログだが貼り付け先のテキストで空白を消す。 
+  これでおｋ。
+  あとはいつも通りssh-agentで秘密鍵を保持してアクセスできる。
+
+herokuのCLIがupdateできないのでアンインストール、再インストール。(HPのドキュメント参照)
