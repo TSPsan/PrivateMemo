@@ -1,0 +1,36 @@
+APIフォルダの必要ファイルビルド(生成)
+
+-PC グローバル側-
+　インストール: JDK(対処のver)(システム環境変数: JAVA_HOME「C:/Program Files/Java/jdk~~」、Path: 「JAVA_HOME/bin」)
+　　java -version で確認。
+
+-APIフォルダ側(ローカル)-
+
+1-1: 証明書取得
+~証明書~
+　https通信を行いファイル生成、およびAPIの通信を行うのに必要。
+　APIアプリのSUN(Java)が本来自動で証明書の取得・通信まで行う。今回は手動で証明書を取得。
+
+htpps通信のブラウザでの証明書をそのまま利用する。
+  ブラウザ(chrome)
+　URL: 鍵マーク　-> 
+　「この接続は保護されています。」->
+　「証明書は有効です」->
+　詳細タブ右下「ファイルにコピー」->
+　エクスポートウィザードに従い生成(ファイル名は適当)「.cer」ファイル
+
+1-2:　証明書認証
+Java証明書管理フォルダ: C:\ProgramFiles\Java\jre~~\lib\security\cacerts
+証明書ルートを登録。
+
+  https://qiita.com/gate9/items/3e4d7e285bc28959e271
+  keytool　コマンド(キーストアデフォルトパスchangeit)
+
+2: Java UTF-8設定　「set _JAVA_OPTIONS = "-Dfile.encordnin=UTF-8"」実行
+
+3: activator.batのコンフィグを修正してもらう
+
+4: DBの修正ファイルをもらう？(スラックでの会話履歴見て確認)
+
+最後: APIアプリフォルダ直下で「activator compile」実行
+　Activator compile: 必要なファイルをビルド

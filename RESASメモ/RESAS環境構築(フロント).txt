@@ -1,0 +1,40 @@
+フロントの必要ファイルビルド(生成)
+
+～PC グローバル側～
+ー　Ruby関連　ー
+　なぜRubyインストールする？
+　-> ライブラリ(Sass、Compass)のみが必要なだけ。ライブラリ実行時に多少Rubyが動作しているがメインはVue(javaScript)。
+
+・インストール: Ruby「環境変数設定」ruby -vで確認。(古いverは公式のDLページのarchive内にある)
+　linux系ではバージョン管理ツールrbenvがインストール・ver切り替えまで可能。
+　Windowsは手動でインストール・環境変数切り替え。
+　*　最新のRubyバージョンだとローカル(開いているコンソール内限定)で切り替え可能。グローバル(環境変数)で変更していないのでやらなくていい。
+　　「ridk use」で切り替え。
+　　その他uruなど切り替えツールがあったようだがメンテ続かず廃止。非推奨。
+・証明書の入手
+　Javaとは少し方法が異なる
+
+ ガイド:　https://bundler.io/guides/rubygems_tls_ssl_troubleshooting_guide.html
+ 　~Updating CA certificates~
+　　証明書(txt文): GlobalSignRootCA.pem　(ブラウザの設定で拡張子「.txt」で保存されることがあるので「.pem」書き換え。)
+　　C:\Ruby21\lib\ruby\2.1.0\rubygems ssl_certsフォルダに入れて終了。(認証コマンド必要なし)
+
+・bundlerインストール　Gemは全てbundlerで管理する。bundle install ~。(gem installはダメ。)
+　アプリではGemfileに必要なGemを記述して bundle 。
+
+ー　Node関連　ー
+・node インストール
+　node: JavaScriptの実行環境。JREのようなもの。
+　バージョン管理ツール「nvm」を使用。Linuxは「nodebrew」があるが使わない。
+　$nvm install latest -> nvm install <ver> -> nvm use <ver>　(管理者権限で実行しないと拒否される)
+
+　*JavaScriptはクライアント側で動作するスクリプト言語であるためインストール不要。ブラウザさえあれば動かすことが可能。
+　*JavaScriptは全てが関数。CoffeeScriptはオブジェクト指向(クラス)で記述可能。RESASはCoffeeScriptを採用。
+
+・npm, yarn　node.jsのライブラリ管理ツール。node.jsインストール時に入手。yarnはFacebook社が作った管理ツール。
+　
+
+-フロントフォルダ側(ローカル)-
+　README通り。(Warnでるけどおｋ。)
+
+ビルドコマンドは不要ぽい。
