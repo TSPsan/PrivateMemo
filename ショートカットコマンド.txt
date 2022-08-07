@@ -1,0 +1,40 @@
+Ctrl + k + s           ショートカットコマンド表示
+Ctrl  + N              new File
+
+Ctrl  + /              行のコメントアウト
+shift + Alt + A        範囲内のコメントブロック化(生成)
+
+Ctrl  + T              ワークスペース内のシンボルへ移動
+
+Ctrl  + shift + enter 行を上に挿入
+
+Alt   + クリック        複数選択
+Ctrl  + shift + L       一致する単語を全て選択
+F2          			リネーム
+Ctrl  + L               行の選択
+Ctrl  + Alt + up down   矩形選択
+
+shift + Alt ドラッグ    ボックス範囲での選択
+Ctrl  + Shift + [,]     折り畳み、展開
+Ctrl  + shift + k,      行の削除
+
+Alt   +  shift + f     フォーマット
+
+Ctrl  + [,]             インデントの増減
+Ctrl  + @               ターミナル表示(非表示)
+Ctrl  + shift @        新規ターミナル
+Ctrl  + shift V         プレビュー画面表示
+
+F8, F8 + shift          エラーへ移動
+Ctrl  + .               クイック修正
+F12                     定義へ移動
+
+Alt + -                 前後へ移動
+
+Chrome
+F6 or Ctrl + k, Ctrl + L URLバー
+Ctrl + shift + I 開発者ツール
+
+Windows
+win + D デスクトップ表示
+
