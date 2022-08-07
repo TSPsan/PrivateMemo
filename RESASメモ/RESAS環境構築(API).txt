@@ -9,7 +9,7 @@ APIフォルダの必要ファイルビルド(生成)
 1-1: 証明書取得
 ~証明書~
 　https通信を行いファイル生成、およびAPIの通信を行うのに必要。
-　APIアプリのSUN(Java)が本来自動で証明書の取得・通信まで行う。今回は手動で証明書を取得。
+　本来はAPIアプリのSUN(Java)が自動で証明書の取得・通信まで行う。今回は手動で証明書を取得。
 
 htpps通信のブラウザでの証明書をそのまま利用する。
   ブラウザ(chrome)
@@ -29,6 +29,7 @@ Java証明書管理フォルダ: C:\ProgramFiles\Java\jre~~\lib\security\cacerts
 2: Java UTF-8設定　「set _JAVA_OPTIONS = "-Dfile.encordnin=UTF-8"」実行
 
 3: activator.batのコンフィグを修正してもらう
+　　Activator-launch-1.2.10.jar -> sbt-launch.jar
 
 4: DBの修正ファイルをもらう？(スラックでの会話履歴見て確認)
 
